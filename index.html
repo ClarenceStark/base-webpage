@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <!-- Primary Meta Tags -->
+  <!-- TODO: Replace with your paper title and author names -->
+  <meta
+    content="Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks - Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, Douwe Kiela"
+    name="title" />
+  <!-- TODO: Write a compelling 150-160 character description of your research -->
+  <meta
+    content="We introduce retrieval-augmented generation (RAG) models that combine pre-trained parametric and non-parametric memory for language generation. By integrat…"
+    name="description" />
+  <!-- TODO: Add 5-10 relevant keywords for your research area -->
+  <meta
+    content="retrieval-augmented generation, knowledge-intensive NLP, pre-trained language models, seq2seq models, non-parametric memory, Wikipedia, open-domain QA, language generation, fact verification"
+    name="keywords" />
+  <!-- TODO: List all authors -->
+  <meta
+    content="Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, Douwe Kiela"
+    name="author" />
+  <meta content="index, follow" name="robots" />
+  <meta content="English" name="language" />
+  <!-- Open Graph / Facebook -->
+  <meta content="article" property="og:type" />
+  <!-- TODO: Replace with your institution or lab name -->
+  <meta content="INSTITUTION_OR_LAB_NAME" property="og:site_name" />
+  <!-- TODO: Same as paper title above -->
+  <meta content="Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" property="og:title" />
+  <!-- TODO: Same as description above -->
+  <meta
+    content="We introduce retrieval-augmented generation (RAG) models that combine pre-trained parametric and non-parametric memory for language generation. By integrat…"
+    property="og:description" />
+  <!-- TODO: Replace with your actual website URL -->
+  <meta content="https://github.com/huggingface/transformers/blob/master/examples/rag/" property="og:url" />
+  <!-- TODO: Create a 1200x630px preview image and update path -->
+  <meta content="static/images/my_paper-picture-1.png" property="og:image" />
+  <meta content="1200" property="og:image:width" />
+  <meta content="630" property="og:image:height" />
+  <meta content="PAPER_TITLE - Research Preview" property="og:image:alt" />
+  <meta content="2024-01-01T00:00:00.000Z" property="article:published_time" />
+  <meta content="FIRST_AUTHOR_NAME" property="article:author" />
+  <meta content="Research" property="article:section" />
+  <meta content="KEYWORD1" property="article:tag" />
+  <meta content="KEYWORD2" property="article:tag" />
+  <!-- Twitter -->
+  <meta content="summary_large_image" name="twitter:card" />
+  <!-- TODO: Replace with your lab/institution Twitter handle -->
+  <meta content="@YOUR_TWITTER_HANDLE" name="twitter:site" />
+  <!-- TODO: Replace with first author's Twitter handle -->
+  <meta content="@AUTHOR_TWITTER_HANDLE" name="twitter:creator" />
+  <!-- TODO: Same as paper title above -->
+  <meta content="Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" name="twitter:title" />
+  <!-- TODO: Same as description above -->
+  <meta
+    content="We introduce retrieval-augmented generation (RAG) models that combine pre-trained parametric and non-parametric memory for language generation. By integrat…"
+    name="twitter:description" />
+  <!-- TODO: Same as social preview image above -->
+  <meta content="static/images/my_paper-picture-1.png" name="twitter:image" />
+  <meta content="PAPER_TITLE - Research Preview" name="twitter:image:alt" />
+  <!-- Academic/Research Specific -->
+  <meta content="Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks" name="citation_title" />
+
+
+  <meta content="2024" name="citation_publication_date" />
+  <meta content="CONFERENCE_NAME" name="citation_conference_title" />
+  <meta content="https://github.com/huggingface/transformers/blob/master/examples/rag/" name="citation_pdf_url" />
+  <!-- Additional SEO -->
+  <meta content="#2563eb" name="theme-color" />
+  <meta content="#2563eb" name="msapplication-TileColor" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="default" name="apple-mobile-web-app-status-bar-style" />
+  <!-- Preconnect for performance -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://ajax.googleapis.com" rel="preconnect" />
+  <link href="https://documentcloud.adobe.com" rel="preconnect" />
+  <link href="https://cdn.jsdelivr.net" rel="preconnect" />
+  <!-- TODO: Replace with your paper title and authors -->
+  <title>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks - Patrick Lewis, Ethan Perez, Aleksandra
+    Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel,
+    Sebastian Riedel, Douwe Kiela | Academic Research</title>
+  <!-- Favicon and App Icons -->
+  <link href="static/images/favicon.ico" rel="icon" type="image/x-icon" />
+  <link href="static/images/favicon.ico" rel="apple-touch-icon" />
+  <!-- Critical CSS - Load synchronously -->
+  <link href="static/css/bulma.min.css" rel="stylesheet" />
+  <link href="static/css/index.css" rel="stylesheet" />
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link as="style" href="static/css/bulma-carousel.min.css" onload="this.onload=null;this.rel='stylesheet'"
+    rel="preload" />
+  <link as="style" href="static/css/bulma-slider.min.css" onload="this.onload=null;this.rel='stylesheet'"
+    rel="preload" />
+  <link as="style" href="static/css/fontawesome.all.min.css" onload="this.onload=null;this.rel='stylesheet'"
+    rel="preload" />
+  <link as="style" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    onload="this.onload=null;this.rel='stylesheet'" rel="preload" />
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link href="static/css/bulma-carousel.min.css" rel="stylesheet" />
+    <link href="static/css/bulma-slider.min.css" rel="stylesheet" />
+    <link href="static/css/fontawesome.all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" rel="stylesheet" />
+  </noscript>
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <!-- Defer non-critical JavaScript -->
+  <script defer="" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer="" src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer="" src="static/js/fontawesome.all.min.js"></script>
+  <script defer="" src="static/js/bulma-carousel.min.js"></script>
+  <script defer="" src="static/js/bulma-slider.min.js"></script>
+  <script defer="" src="static/js/index.js"></script>
+  <!-- Structured Data for Academic Papers -->
+  <script
+    type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks","description":"We introduce retrieval-augmented generation (RAG) models that combine pre-trained parametric and non-parametric memory for language generation. By integrat…","author":[{"@type":"Person","name":"Patrick Lewis","affiliation":{"@type":"Organization","name":"Facebook AI Research; University College London; New York University; plewis@fb.com"}},{"@type":"Person","name":"Ethan Perez","affiliation":{"@type":"Organization","name":"Facebook AI Research; University College London; New York University; plewis@fb.com"}}],"datePublished":"2024-01-01","publisher":{"@type":"Organization","name":"Conference/Journal"},"url":"https://github.com/huggingface/transformers/blob/master/examples/rag/","image":"static/images/my_paper-picture-1.png","keywords":["retrieval-augmented generation","knowledge-intensive NLP","pre-trained language models","seq2seq models","non-parametric memory","Wikipedia","open-domain QA","language generation","fact verification"],"abstract":"Large pre-trained language models have been shown to store factual knowledge in their parameters, and achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks, their performance lags behind task-specific architectures. Additionally, providing provenance for their decisions and updating their world knowledge remain open research problems. Pretrained models with a differentiable access mechanism to explicit non-parametric memory have so far been only investigated for extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) - models which combine pre-trained parametric and non-parametric memory for language generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across the whole generated sequence, and another which can use different passages per token. We fine-tune and evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state of the art on three open domain QA tasks, outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.","citation":"@article{lewis2020retrieval,\n  title={Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks},\n  author={Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{\"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},\n  journal={arXiv preprint arXiv:2004.08503},\n  year={2020}\n}","isAccessibleForFree":true,"license":"https://creativecommons.org/licenses/by/4.0/","mainEntity":{"@type":"WebPage","@id":"https://github.com/huggingface/transformers/blob/master/examples/rag/"},"about":[{"@type":"Thing","name":"retrieval-augmented generation"},{"@type":"Thing","name":"knowledge-intensive NLP"}]}</script>
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "INSTITUTION_OR_LAB_NAME",
+    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
+    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
+    "sameAs": [
+      "https://twitter.com/YOUR_TWITTER_HANDLE",
+      "https://github.com/YOUR_GITHUB_USERNAME"
+    ]
+  }
+  </script>
+  <meta content="Lewis, Patrick" name="citation_author" />
+  <meta content="Perez, Ethan" name="citation_author" />
+  <meta content="Piktus, Aleksandra" name="citation_author" />
+  <meta content="Petroni, Fabio" name="citation_author" />
+  <meta content="Karpukhin, Vladimir" name="citation_author" />
+  <meta content="Goyal, Naman" name="citation_author" />
+  <meta content="Küttler, Heinrich" name="citation_author" />
+  <meta content="Lewis, Mike" name="citation_author" />
+  <meta content="Yih, Wen-tau" name="citation_author" />
+  <meta content="Rocktäschel, Tim" name="citation_author" />
+  <meta content="Riedel, Sebastian" name="citation_author" />
+  <meta content="Kiela, Douwe" name="citation_author" />
+</head>
+
+<body>
+  <!-- Scroll to Top Button -->
+  <button aria-label="Scroll to top" class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+  <!-- More Works Dropdown -->
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <!-- TODO: Replace with your lab's related works -->
+        <a class="work-item" href="https://arxiv.org/abs/PAPER_ID_1" target="_blank">
+          <div class="work-info">
+            <!-- TODO: Replace with actual paper title -->
+            <h5>Paper Title 1</h5>
+            <!-- TODO: Replace with brief description -->
+            <p>Brief description of the work and its main contribution.</p>
+            <!-- TODO: Replace with venue and year -->
+            <span class="work-venue">Conference/Journal 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <!-- TODO: Add more related works or remove extra items -->
+        <a class="work-item" href="https://arxiv.org/abs/PAPER_ID_2" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 2</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+        <a class="work-item" href="https://arxiv.org/abs/PAPER_ID_3" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 3</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2023</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <main id="main-content">
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <!-- TODO: Replace with your paper title -->
+              <h1 class="title is-1 publication-title">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+              </h1>
+              <div class="is-size-5 publication-authors"><span class="author-block">Patrick Lewis, Ethan Perez,
+                  Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis,
+                  Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, Douwe Kiela</span></div>
+              <div class="is-size-5 publication-authors"><span class="author-block">Facebook AI Research; University
+                  College London; New York University; plewis@fb.com</span></div>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- TODO: Update with your arXiv paper ID -->
+                  <span class="link-block">
+                    <a class="external-link button is-normal is-rounded is-dark"
+                      href="https://arxiv.org/pdf/&lt;ARXIV PAPER ID&gt;.pdf" target="_blank">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <!-- TODO: Add your supplementary material PDF or remove this section -->
+                  <span class="link-block">
+                    <a class="external-link button is-normal is-rounded is-dark"
+                      href="static/pdfs/supplementary_material.pdf" target="_blank">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Supplementary</span>
+                    </a>
+                  </span>
+                  <!-- TODO: Replace with your GitHub repository URL -->
+                  <span class="link-block">
+                    <a class="external-link button is-normal is-rounded is-dark"
+                      href="https://github.com/huggingface/transformers/blob/master/examples/rag/" target="_blank">
+                      <span class="icon">
+                        <i class="fab fa-github"
+                          href="https://github.com/huggingface/transformers/blob/master/examples/rag/"></i>
+                      </span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <!-- TODO: Update with your arXiv paper ID -->
+                  <span class="link-block">
+                    <a class="external-link button is-normal is-rounded is-dark"
+                      href="https://arxiv.org/abs/&lt;ARXIV PAPER ID&gt;" target="_blank">
+                      <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>arXiv</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Core Contribution -->
+    <section class="hero teaser">
+      <div class="container is-widescreen">
+        <div class="hero-body">
+          <!-- TODO: Replace with your core figure -->
+          <img
+            alt="Overview of our approach. We combine a pre-trained retriever ( Query Encoder + Document Index ) with a"
+            id="core-figure" src="static/images/my_paper-picture-1.png"
+            style="width: 100%; height: auto; max-width: 1400px; margin: 0 auto; display: block;" />
+          <!-- TODO: Replace with your core figure description -->
+          <h2 class="subtitle has-text-centered">We introduce retrieval-augmented generation (RAG) models that combine
+            pre-trained parametric and non-parametric memory for language generation. By integrating a dense vector
+            index of Wikipedia with a pre-trained seq2seq model and a retriever, RAG models can generate more specific,
+            diverse, and factual language compared to parametric-only seq2seq models. We achieve state-of-the-art
+            results on open-domain QA tasks and demonstrate the effectiveness of RAG for knowledge-intensive generation
+            and fact verification.</h2>
+        </div>
+      </div>
+    </section>
+    <!-- End Core Contribution -->
+    <!-- Paper abstract -->
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <!-- TODO: Replace with your paper abstract -->
+              <p>Large pre-trained language models have been shown to store factual knowledge in their parameters, and
+                achieve state-of-the-art results when fine-tuned on downstream NLP tasks. However, their ability to
+                access and precisely manipulate knowledge is still limited, and hence on knowledge-intensive tasks,
+                their performance lags behind task-specific architectures. Additionally, providing provenance for their
+                decisions and updating their world knowledge remain open research problems. Pretrained models with a
+                differentiable access mechanism to explicit non-parametric memory have so far been only investigated for
+                extractive downstream tasks. We explore a general-purpose fine-tuning recipe for retrieval-augmented
+                generation (RAG) - models which combine pre-trained parametric and non-parametric memory for language
+                generation. We introduce RAG models where the parametric memory is a pre-trained seq2seq model and the
+                non-parametric memory is a dense vector index of Wikipedia, accessed with a pre-trained neural
+                retriever. We compare two RAG formulations, one which conditions on the same retrieved passages across
+                the whole generated sequence, and another which can use different passages per token. We fine-tune and
+                evaluate our models on a wide range of knowledge-intensive NLP tasks and set the state of the art on
+                three open domain QA tasks, outperforming parametric seq2seq models and task-specific
+                retrieve-and-extract architectures. For language generation tasks, we find that RAG models generate more
+                specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End paper abstract -->
+    <!-- Image carousel -->
+    <section class="hero is-small">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3">Methodology</h2>
+          <p class="content has-text-justified">We propose retrieval-augmented generation (RAG) models that integrate a
+            pre-trained seq2seq model with a dense vector index of Wikipedia, accessed via a pre-trained neural
+            retriever. RAG models can condition on retrieved passages either across the entire sequence or per token,
+            allowing for flexible handling of knowledge during generation.</p>
+          <p class="content has-text-justified">The parametric memory is a pre-trained seq2seq model, while the
+            non-parametric memory is a dense vector index of Wikipedia. The retriever is a pre-trained model that
+            retrieves relevant documents based on the input query, and the seq2seq model conditions on these retrieved
+            documents to generate the output.</p>
+          <div class="carousel results-carousel" id="results-carousel">
+
+
+            <div class="item"><img alt="RAG-Token document posterior p ( z i | x, y i , y -i ) for each generated"
+                loading="lazy" src="static/images/my_paper-picture-2.png" />
+              <h2 class="subtitle has-text-centered">Figure 2: RAG-Token document posterior p ( z i | x, y i , y -i )
+                for each generated token for input 'Hemingway" for Jeopardy generation with 5 retrieved documents. The
+                posterior for document 1 is high when generating 'A Farewell to Arms" and for document 2 when generating
+                'The Sun Also Rises".</h2>
+            </div>
+            <div class="item"><img
+                alt="Left: NQ performance as more documents are retrieved. Center: Retrieval recall performance in NQ. Right: MS-MARCO Bleu-1 and"
+                loading="lazy" src="static/images/my_paper-picture-3.png" />
+              <h2 class="subtitle has-text-centered">Figure 3: Left: NQ performance as more documents are retrieved.
+                Center: Retrieval recall performance in NQ. Right: MS-MARCO Bleu-1 and Rouge-L as more documents are
+                retrieved.</h2>
+            </div>
+            <div class="item"><img
+                alt="Annotation interface for human evaluation of factuality. A pop-out for detailed instructions and a worked example appear when"
+                loading="lazy" src="static/images/my_paper-picture-4.png" />
+              <h2 class="subtitle has-text-centered">Figure 4: Annotation interface for human evaluation of factuality.
+                A pop-out for detailed instructions and a worked example appear when clicking "view tool guide".</h2>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- End image carousel -->
+    <!-- Results section with multiple images side by side -->
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3">Results</h2>
+          <p class="content has-text-justified">On open-domain QA tasks, RAG models achieve state-of-the-art results,
+            outperforming parametric seq2seq models and task-specific retrieve-and-extract architectures. For language
+            generation tasks, RAG models generate more specific, diverse, and factual language compared to a
+            state-of-the-art parametric-only seq2seq baseline.</p>
+          <p class="content has-text-justified">RAG models demonstrate strong performance on various knowledge-intensive
+            tasks, including open-domain question answering, abstractive question answering, Jeopardy question
+            generation, and fact verification. They set new state-of-the-art results on three open-domain QA tasks.</p>
+          <div class="columns is-centered has-text-centered is-multiline">
+            <div class="column is-half-tablet is-one-third-desktop">
+              <figure class="image" style="margin-bottom: 1rem;">
+                <img
+                  alt="Open-Domain QA Test Scores. For TQA, left column uses the standard test set for OpenDomain QA, right column"
+                  loading="lazy" src="static/images/my_paper-table-1.png"
+                  style="width: 100%; height: auto; object-fit: contain; max-height: 400px;" />
+              </figure>
+              <p class="subtitle is-6">Open-Domain QA Test Scores. For TQA, left column uses the standard test set for
+                OpenDomain QA, right column</p>
+            </div>
+            <div class="column is-half-tablet is-one-third-desktop">
+              <figure class="image" style="margin-bottom: 1rem;">
+                <img
+                  alt="Table 2 shows our results on FEVER. For 3-way classification, RAG scores are within 4.3% of state-of-the-art models,"
+                  loading="lazy" src="static/images/my_paper-table-2.png"
+                  style="width: 100%; height: auto; object-fit: contain; max-height: 400px;" />
+              </figure>
+              <p class="subtitle is-6">Table 2 shows our results on FEVER. For 3-way classification, RAG scores are
+                within 4.3% of state-of-the-art models,</p>
+            </div>
+            <div class="column is-half-tablet is-one-third-desktop">
+              <figure class="image" style="margin-bottom: 1rem;">
+                <img
+                  alt="Left: NQ performance as more documents are retrieved. Center: Retrieval recall performance in NQ. Right: MS-MARCO Bleu-1 and"
+                  loading="lazy" src="static/images/my_paper-picture-3.png"
+                  style="width: 100%; height: auto; object-fit: contain; max-height: 400px;" />
+              </figure>
+              <p class="subtitle is-6">Left: NQ performance as more documents are retrieved. Center: Retrieval recall
+                performance in NQ. Right: MS-MARCO Bleu-1 and</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre id="bibtex-code"><code>@article{lewis2020retrieval,
+  title={Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks},
+  author={Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},
+  journal={arXiv preprint arXiv:2004.08503},
+  year={2020}
+}</code></pre>
+      </div>
+    </section>
+    <!--End BibTex citation -->
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                  href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                You are free to borrow the source code of this website, we just ask that you link back to this page in
+                the footer. <br /> This website is licensed under a <a
+                  href="http://creativecommons.org/licenses/by-sa/4.0/" rel="license" target="_blank">Creative
+                  Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Statcounter tracking code -->
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+    <!-- End of Statcounter Code -->
+  </main>
+</body>
+
+</html>
